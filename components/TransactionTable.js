@@ -17,10 +17,14 @@ export default function TransactionTable({ transactions }) {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                 Amount
               </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Category
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             {transactions.map((transaction, index) => {
+              console.log("transaction",transaction)
               return (
                 <tr key={index} className="hover:bg-gray-200">
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -31,13 +35,18 @@ export default function TransactionTable({ transactions }) {
                     {transaction.description}
                   </td>
                   <td
-                    className={`px-6 py-4 whitespace-nowrap text-sm text-right font-medium ${
+                    className={`px-6 py-4 whitespace-nowrap text-sm ${
                       parseFloat(transaction.amount) < 0
                         ? "text-red-500"
                         : "text-green-500"
                     }`}
                   >
                     ${Math.abs(parseFloat(transaction.amount)).toFixed(2)}
+                  </td>
+                  <td className="px-6 py-4 text-sm">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                      {transaction.category}
+                    </span>
                   </td>
                 </tr>
               );

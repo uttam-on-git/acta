@@ -1,6 +1,7 @@
-"use client"
+"use client";
 import FileUpload from "@/components/FileUpload";
 import TransactionTable from "@/components/TransactionTable";
+import { processTransactions } from "@/utils/categorize";
 import { useState } from "react";
 
 export default function Home() {
@@ -8,14 +9,22 @@ export default function Home() {
 
   const handleDataParsed = (data) => {
     console.log("state lift:", data[0].amount);
-    setTransactions(data);
+    const processed = processTransactions(data);
+    console.log("Processed:", processed);
+    setTransactions(processed);
   };
 
   return (
     <main className="min-h-screen p-8 bg-gray-50">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">Finance Tracker</h1>
-        <a href="/sample.csv" download className="text-blue-600 hover:underline">Download sample csv data</a>
+        <a
+          href="/sample.csv"
+          download
+          className="text-blue-600 hover:underline"
+        >
+          Download sample csv data
+        </a>
         <FileUpload onDataParsed={handleDataParsed} />
 
         {transactions.length > 0 && (
