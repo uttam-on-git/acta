@@ -1,0 +1,9 @@
+date,description,amount,type
+2024-01-15,Starbucks Coffee,-4.50,debit
+2024-01-15,Salary Deposit,3000.00,credit
+2024-01-16,Uber Ride,-12.30,debit
+2024-01-17,Grocery Store,-85.20,debit
+2024-01-18,Netflix Subscription,-15.99,debit
+2024-01-20,Restaurant Dinner,-45.00,debit
+2024-01-22,Gas Station,-40.00,debit
+2024-01-25,Amazon Purchase,-67.80,debit
