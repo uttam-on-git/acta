@@ -9,12 +9,14 @@ import { calculateSummary, getSpendingOvertime } from "@/utils/calculations";
 import { processTransactions } from "@/utils/categorize";
 import { useMemo, useState } from "react";
 import SearchBar from "@/components/SearchBar";
+import { CategoryFilter } from "@/components/CategoryFilter";
 
 export default function Home() {
   const [transactions, setTransactions] = useState([]);
   const [summary, setSummary] = useState(null);
   const [spendingOverTime, setSpendingOverTime] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleDataParsed = (data) => {
     console.log("state lift:", data[0].amount);
@@ -35,17 +37,28 @@ export default function Home() {
     setSearchTerm(value);
   };
 
-  const filteredTransaction = useMemo(() => {
-    if (searchTerm === "") return transactions;
+  const handleCategoryChange = (value) => {
+    console.log("parents recieves the category selected", value);
+    setSelectedCategory(value);
+  };
 
-    //filter based on description
+  const filteredTransaction = useMemo(() => {
+    //refactor this...so that we can use both...searchterm and selectedcategory
 
     return transactions.filter((transaction) => {
-      return transaction.description
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase().trim());
+      const matchedSearch =
+        searchTerm == "" ||
+        transaction.description
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase().trim());
+
+      const matchedCategory =
+        selectedCategory == "" ||
+        transaction.category.toLowerCase() === selectedCategory.toLowerCase();
+
+      return matchedSearch && matchedCategory;
     });
-  }, [transactions, searchTerm]);
+  }, [transactions, searchTerm, selectedCategory]);
 
   return (
     <main className="min-h-screen p-4 md:p-8 bg-gray-50">
@@ -88,6 +101,10 @@ export default function Home() {
 
             {/* Full Width Chart */}
             <SpendingLineChart data={spendingOverTime} />
+
+            <div className="my-10">
+              <CategoryFilter onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
+            </div>
 
             <SearchBar onSearchChange={handleSearchChange} />
             {transactions.length > 0 && (
