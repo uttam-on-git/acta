@@ -34,7 +34,6 @@ export function CategoryBarChart({ data }) {
       </h2>
 
       <ResponsiveContainer width="100%" height={300}>
-        {/* ✅ FIX 1: pass data */}
         <BarChart
           data={topCategories}
           layout="vertical"
@@ -42,13 +41,11 @@ export function CategoryBarChart({ data }) {
         >
           <CartesianGrid strokeDasharray="3 3" />
 
-          {/* Amount on X-axis */}
           <XAxis
             type="number"
             tickFormatter={(value) => `$${value}`}
           />
 
-          {/* Category names on Y-axis */}
           <YAxis
             type="category"
             dataKey="category"

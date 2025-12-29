@@ -7,12 +7,14 @@ import SummaryCards from "@/components/summaryCard";
 import TransactionTable from "@/components/TransactionTable";
 import { calculateSummary, getSpendingOvertime } from "@/utils/calculations";
 import { processTransactions } from "@/utils/categorize";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import SearchBar from "@/components/SearchBar";
 
 export default function Home() {
   const [transactions, setTransactions] = useState([]);
   const [summary, setSummary] = useState(null);
   const [spendingOverTime, setSpendingOverTime] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleDataParsed = (data) => {
     console.log("state lift:", data[0].amount);
@@ -27,6 +29,23 @@ export default function Home() {
       getSpendingOvertime(processed)
     );
   };
+
+  const handleSearchChange = (value) => {
+    console.log("parent recieves the search term", value);
+    setSearchTerm(value);
+  };
+
+  const filteredTransaction = useMemo(() => {
+    if (searchTerm === "") return transactions;
+
+    //filter based on description
+
+    return transactions.filter((transaction) => {
+      return transaction.description
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase().trim());
+    });
+  }, [transactions, searchTerm]);
 
   return (
     <main className="min-h-screen p-4 md:p-8 bg-gray-50">
@@ -57,23 +76,38 @@ export default function Home() {
         )}
 
         {summary && (
-        <>
-          {/* Summary Cards */}
-          <SummaryCards summary={summary} />
+          <>
+            {/* Summary Cards */}
+            <SummaryCards summary={summary} />
 
-          {/* Charts Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-            <CategoryChart data={summary.byCategory} />
-            <CategoryBarChart data={summary.byCategory} />
-          </div>
+            {/* Charts Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+              <CategoryChart data={summary.byCategory} />
+              <CategoryBarChart data={summary.byCategory} />
+            </div>
 
-          {/* Full Width Chart */}
-          <SpendingLineChart data={spendingOverTime} />
+            {/* Full Width Chart */}
+            <SpendingLineChart data={spendingOverTime} />
 
-          {/* Transactions Table */}
-          <TransactionTable transactions={transactions} />
-        </>
-      )}
+            <SearchBar onSearchChange={handleSearchChange} />
+            {transactions.length > 0 && (
+              <p className="text-sm text-gray-600 mb-4">
+                Showing {filteredTransaction.length} of {transactions.length}{" "}
+                transactions
+              </p>
+            )}
+
+            {/* Transactions Table */}
+            <TransactionTable transactions={filteredTransaction} />
+            <div className="mt-10">
+              {filteredTransaction.length === 0 && searchTerm !== "" && (
+                <p className="text-center text-gray-500 py-8">
+                  No transactions found for {searchTerm}
+                </p>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </main>
   );
