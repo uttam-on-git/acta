@@ -38,3 +38,29 @@ export function calculateSummary(transactions) {
       .sort((a, b) => b.total - a.total),
   };
 }
+
+export function getSpendingOvertime(transactions) {
+  const byDate = transactions.reduce((result, t) => {
+    //skip income we care about expenses only on each date
+    if (t.amount >= 0) return result;
+
+    const date = t.date;
+
+    if (!result[date]) {
+      result[date] = 0;
+    }
+
+    result[date] += Math.abs(t.amount);
+
+    return result;
+  }, {});
+
+  //convert object to array...then sort it by date...
+
+  return Object.entries(byDate)
+    .map(([date, total]) => ({
+      date,
+      amount: total,
+    }))
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
+}
