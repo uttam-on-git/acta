@@ -10,6 +10,7 @@ import { processTransactions } from "@/utils/categorize";
 import { useMemo, useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import { CategoryFilter } from "@/components/CategoryFilter";
+import { DateRangePicker } from "@/components/DateRangePicker";
 
 export default function Home() {
   const [transactions, setTransactions] = useState([]);
@@ -17,6 +18,8 @@ export default function Home() {
   const [spendingOverTime, setSpendingOverTime] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const handleDataParsed = (data) => {
     console.log("state lift:", data[0].amount);
@@ -42,23 +45,54 @@ export default function Home() {
     setSelectedCategory(value);
   };
 
+  const handleStartDate = (value) => {
+    console.log("mf parent recieve start date", value);
+    setStartDate(value);
+  };
+
+  const handleEndDate = (value) => {
+    console.log("mf parent recieve end date", value);
+    setEndDate(value);
+  };
+
   const filteredTransaction = useMemo(() => {
     //refactor this...so that we can use both...searchterm and selectedcategory
 
     return transactions.filter((transaction) => {
       const matchedSearch =
-        searchTerm == "" ||
+        searchTerm === "" ||
         transaction.description
           .toLowerCase()
           .includes(searchTerm.toLowerCase().trim());
 
       const matchedCategory =
-        selectedCategory == "" ||
+        selectedCategory === "" ||
         transaction.category.toLowerCase() === selectedCategory.toLowerCase();
 
-      return matchedSearch && matchedCategory;
+      //date filter
+
+      const transactionDate = new Date(transaction.date);
+
+      const start = startDate ? new Date(startDate) : null;
+
+      const end = endDate ? new Date(endDate) : null;
+
+      const matchedDate =
+        (!start && !end) ||
+        ((!start || transactionDate >= start) &&
+          (!end || transactionDate <= end));
+
+      return matchedSearch && matchedCategory && matchedDate;
     });
-  }, [transactions, searchTerm, selectedCategory]);
+  }, [transactions, searchTerm, selectedCategory, startDate, endDate]);
+
+  const categories = useMemo(() => {
+    const uniqueCategories = [...new Set(transactions.map((t) => t.category))];
+
+    console.log("what unique category do you have bro... ", uniqueCategories);
+
+    return uniqueCategories.sort();
+  }, [transactions]);
 
   return (
     <main className="min-h-screen p-4 md:p-8 bg-gray-50">
@@ -103,7 +137,11 @@ export default function Home() {
             <SpendingLineChart data={spendingOverTime} />
 
             <div className="my-10">
-              <CategoryFilter onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
+              <CategoryFilter
+                onCategoryChange={handleCategoryChange}
+                selectedCategory={selectedCategory}
+                categories={categories}
+              />
             </div>
 
             <SearchBar onSearchChange={handleSearchChange} />
@@ -113,6 +151,13 @@ export default function Home() {
                 transactions
               </p>
             )}
+
+            <DateRangePicker
+              startDate={startDate}
+              endDate={endDate}
+              onStartDateChange={handleStartDate}
+              onEndDateChange={handleEndDate}
+            />
 
             {/* Transactions Table */}
             <TransactionTable transactions={filteredTransaction} />
