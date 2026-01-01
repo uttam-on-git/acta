@@ -12,8 +12,9 @@ import SearchBar from "@/components/SearchBar";
 import { CategoryFilter } from "@/components/CategoryFilter";
 import { DateRangePicker } from "@/components/DateRangePicker";
 import { exportToPdf } from "@/utils/exportPdf";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
-export default function Home() {
+export default function Dashboard() {
   const [transactions, setTransactions] = useState([]);
   const [summary, setSummary] = useState(null);
   const [spendingOverTime, setSpendingOverTime] = useState([]);
@@ -116,8 +117,9 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-4 md:p-8 bg-gray-50">
+    <main className="min-h-screen p-4 md:p-8 bg-surface">
       <div className="max-w-6xl mx-auto">
+        <ThemeToggle></ThemeToggle>
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-8">Finance Tracker</h1>
           <p className="text-gray-600">
