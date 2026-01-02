@@ -4,7 +4,15 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ChartBar, ChartBarIcon, FilePdfIcon, LightningIcon, LockIcon, MagnifyingGlassIcon, MoonIcon } from "@phosphor-icons/react";
+import {
+  ChartBar,
+  ChartBarIcon,
+  FilePdfIcon,
+  LightningIcon,
+  LockIcon,
+  MagnifyingGlassIcon,
+  MoonIcon,
+} from "@phosphor-icons/react";
 
 export default function Homepage() {
   return (
@@ -57,11 +65,11 @@ export default function Homepage() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-24">
         <div className="relative rounded-2xl border border-border bg-surface shadow-2xl overflow-hidden">
           <Image
-            src="/dashboard-ss.webp"
+            src="/dashboard-ss.png"
             alt="dashboard preview"
             className="w-full rounded-lg"
-            width="100"
-            height="100"
+            width={1400}
+            height={900}
           ></Image>
 
           <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
@@ -97,7 +105,7 @@ export default function Homepage() {
               opacity: 1,
               transition: {
                 staggerChildren: 0.1,
-                delayChildren: 0.2
+                delayChildren: 0.2,
               },
             },
           }}
@@ -113,7 +121,9 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-              <span className="text-3xl"><ChartBarIcon></ChartBarIcon></span>
+              <span className="text-3xl">
+                <ChartBarIcon></ChartBarIcon>
+              </span>
             </div>
             <h3 className="text-xl font-semibold mb-2">Interactive Charts</h3>
             <p className="text-muted">
@@ -132,7 +142,9 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl"><LockIcon></LockIcon></span>
+              <span className="text-3xl">
+                <LockIcon></LockIcon>
+              </span>
             </div>
             <h3 className="text-xl font-semibold mb-2">Privacy First</h3>
             <p className="text-muted">
@@ -151,7 +163,9 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl"><LightningIcon></LightningIcon></span>
+              <span className="text-3xl">
+                <LightningIcon></LightningIcon>
+              </span>
             </div>
             <h3 className="text-xl font-semibold mb-2">Instant Analysis</h3>
             <p className="text-muted">
@@ -170,7 +184,9 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl"><MagnifyingGlassIcon></MagnifyingGlassIcon></span>
+              <span className="text-3xl">
+                <MagnifyingGlassIcon></MagnifyingGlassIcon>
+              </span>
             </div>
             <h3 className="text-xl font-semibold mb-2">Powerful Filters</h3>
             <p className="text-muted">
@@ -188,7 +204,9 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl"><FilePdfIcon></FilePdfIcon></span>
+              <span className="text-3xl">
+                <FilePdfIcon></FilePdfIcon>
+              </span>
             </div>
             <h3 className="text-xl font-semibold mb-2">PDF Export</h3>
             <p className="text-muted">
@@ -206,7 +224,9 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl"><MoonIcon></MoonIcon></span>
+              <span className="text-3xl">
+                <MoonIcon></MoonIcon>
+              </span>
             </div>
             <h3 className="text-xl font-semibold mb-2">Dark Mode</h3>
             <p className="text-muted">
@@ -221,18 +241,14 @@ export default function Homepage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-muted mb-8 font-medium">Perfect for</p>
           <div className="flex flex-wrap justify-center gap-6 text-lg">
-            <span className="px-4 py-2 bg-surface rounded-lg">
-              Freelancers
-            </span>
+            <span className="px-4 py-2 bg-surface rounded-lg">Freelancers</span>
             <span className="px-4 py-2 bg-surface rounded-lg">
               Small Businesses
             </span>
             <span className="px-4 py-2 bg-surface rounded-lg">
               Financial Advisors
             </span>
-            <span className="px-4 py-2 bg-surface rounded-lg">
-              Homeowners
-            </span>
+            <span className="px-4 py-2 bg-surface rounded-lg">Homeowners</span>
             <span className="px-4 py-2 bg-surface rounded-lg">Students</span>
             <span className="px-4 py-2 bg-surface rounded-lg">Families</span>
           </div>
