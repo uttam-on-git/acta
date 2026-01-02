@@ -18,47 +18,27 @@ export function ThemeToggle() {
     );
   }
 
-  const currentTheme = theme === "system" ? systemTheme : theme;
+  const resolvedTheme = theme === "system" ? systemTheme : theme;
+
+  const isDark = resolvedTheme === "dark";
 
   return (
-    <div className="block">
-    <div className="flex items-center gap-1 p-1 bg-surface-muted rounded-lg">
-      <button
-        onClick={() => setTheme("light")}
-        className={`p-2 rounded transition ${
-          theme === "light"
-            ? "bg-surface text-foreground"
-            : "text-muted hover:text-foreground"
-        }`}
-        aria-label="Light mode"
-      >
-        <SunIcon className="w-4 h-4" />
-      </button>
-
-      <button
-        onClick={() => setTheme("system")}
-        className={`p-2 rounded transition ${
-          theme === "system"
-            ? "bg-surface text-foreground"
-            : "text-muted hover:text-foreground"
-        }`}
-        aria-label="System mode"
-      >
-        <MonitorIcon className="w-4 h-4" />
-      </button>
-
-      <button
-        onClick={() => setTheme("dark")}
-        className={`p-2 rounded transition ${
-          theme === "dark"
-            ? "bg-surface text-foreground"
-            : "text-muted hover:text-foreground"
-        }`}
-        aria-label="Dark mode"
-      >
-        <MoonIcon className="w-4 h-4" />
-      </button>
-    </div>
-    </div>
+    <button
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="
+        relative flex h-9 w-9 items-center justify-center
+        rounded-lg border border-border
+        bg-surface hover:bg-surface-hover
+        transition-all duration-300
+        hover:scale-105
+      "
+      aria-label="Toggle theme"
+    >
+      {isDark ? (
+        <SunIcon className="h-4 w-4 text-foreground transition-transform rotate-0 scale-100" />
+      ) : (
+        <MoonIcon className="h-4 w-4 text-foreground transition-transform rotate-0 scale-100" />
+      )}
+    </button>
   );
 }

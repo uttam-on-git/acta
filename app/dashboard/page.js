@@ -118,8 +118,7 @@ export default function Dashboard() {
 
   return (
     <main className="min-h-screen p-4 md:p-8 bg-surface">
-      <div className="max-w-6xl mx-auto">
-        <ThemeToggle></ThemeToggle>
+      <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-8">Finance Tracker</h1>
           <p className="text-gray-600">

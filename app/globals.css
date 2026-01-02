@@ -1,98 +1,111 @@
 @import "tailwindcss";
 
 @theme {
+  /* Honeydew (Success/Income - Green) */
+  --color-honeydew-50: oklch(96.73% 0.012 164.80);
+  --color-honeydew-100: oklch(93.69% 0.026 165.63);
+  --color-honeydew-400: oklch(75.21% 0.103 160.74);
+  --color-honeydew-500: oklch(69.45% 0.125 158.93);
+  --color-honeydew-600: oklch(59% 0.105 158.85);
+  --color-honeydew-700: oklch(48.08% 0.083 159.48);
   
-  /* Red Scale */
+  /* Dark Cyan (Primary Brand - Teal/Cyan) */
+  --color-dark-cyan-50: oklch(96.84% 0.011 189.83);
+  --color-dark-cyan-100: oklch(93.75% 0.020 189.21);
+  --color-dark-cyan-400: oklch(75.64% 0.081 184.43);
+  --color-dark-cyan-500: oklch(69.79% 0.095 183.73);
+  --color-dark-cyan-600: oklch(59.38% 0.080 183.26);
+  --color-dark-cyan-700: oklch(48.26% 0.063 183.62);
+  
+  /* Deep Teal (Alternative/Accent) */
+  --color-deep-teal-50: oklch(96.41% 0.004 197.09);
+  --color-deep-teal-500: oklch(63.39% 0.043 192.16);
+  --color-deep-teal-600: oklch(53.89% 0.035 193.61);
+  
+  /* Almond Silk (Warm Neutrals) */
+  --color-almond-silk-50: oklch(96.15% 0.006 43.33);
+  --color-almond-silk-100: oklch(92.43% 0.013 56.24);
+  --color-almond-silk-200: oklch(84.49% 0.025 51.11);
+  --color-almond-silk-300: oklch(76.68% 0.039 52.55);
+  --color-almond-silk-400: oklch(68.56% 0.054 51.07);
+  --color-almond-silk-500: oklch(60.46% 0.068 51.04);
+  --color-almond-silk-600: oklch(51.52% 0.058 50.60);
+  --color-almond-silk-700: oklch(42.29% 0.045 51.78);
+  --color-almond-silk-800: oklch(32.29% 0.032 50.28);
+  --color-almond-silk-900: oklch(21.82% 0.018 55.23);
+  --color-almond-silk-950: oklch(18.38% 0.013 55.46);
+  
+  /* Dusty Taupe (Cool Neutrals for Dark Mode) */
+  --color-dusty-taupe-50: oklch(96.07% 0.005 48.69);
+  --color-dusty-taupe-100: oklch(92.13% 0.010 41.88);
+  --color-dusty-taupe-200: oklch(84.31% 0.019 46.78);
+  --color-dusty-taupe-300: oklch(76.15% 0.030 44.95);
+  --color-dusty-taupe-400: oklch(68.03% 0.042 46.43);
+  --color-dusty-taupe-500: oklch(59.63% 0.056 45.90);
+  --color-dusty-taupe-600: oklch(50.87% 0.045 46.20);
+  --color-dusty-taupe-700: oklch(41.59% 0.036 44.62);
+  --color-dusty-taupe-800: oklch(31.99% 0.025 46.28);
+  --color-dusty-taupe-900: oklch(21.34% 0.014 41.57);
+  --color-dusty-taupe-950: oklch(18% 0.011 39.26);
+  
+  /* Red (Danger/Expense) - Keep from original */
   --color-red-50: oklch(0.971 0.013 17.38);
   --color-red-500: oklch(0.637 0.237 25.331);
   --color-red-600: oklch(0.577 0.245 27.325);
-  --color-red-700: oklch(0.505 0.213 27.518);
-  
-  /* Blue Scale */
-  --color-blue-50: oklch(0.97 0.014 254.604);
-  --color-blue-400: oklch(0.707 0.165 254.624);
-  --color-blue-500: oklch(0.623 0.214 259.815);
-  --color-blue-600: oklch(0.546 0.245 262.881);
-  --color-blue-700: oklch(0.488 0.243 264.376);
-  --color-blue-950: oklch(0.282 0.091 267.935);
-  
-  /* Green Scale */
-  --color-green-50: oklch(0.982 0.018 155.826);
-  --color-green-500: oklch(0.723 0.219 149.579);
-  --color-green-600: oklch(0.627 0.194 149.214);
-  --color-green-700: oklch(0.527 0.154 150.069);
-  
-  /* Slate Scale (neutrals) */
-  --color-slate-50: oklch(0.984 0.003 247.858);
-  --color-slate-100: oklch(0.968 0.007 247.896);
-  --color-slate-200: oklch(0.929 0.013 255.508);
-  --color-slate-300: oklch(0.869 0.022 252.894);
-  --color-slate-400: oklch(0.704 0.04 256.788);
-  --color-slate-500: oklch(0.554 0.046 257.417);
-  --color-slate-600: oklch(0.446 0.043 257.281);
-  --color-slate-700: oklch(0.372 0.044 257.287);
-  --color-slate-800: oklch(0.279 0.041 260.031);
-  --color-slate-900: oklch(0.208 0.042 265.755);
-  --color-slate-950: oklch(0.129 0.042 264.695);
-  
-  /* Amber (for warnings/accents) */
-  --color-amber-50: oklch(0.987 0.022 95.277);
-  --color-amber-500: oklch(0.769 0.188 70.08);
-  --color-amber-600: oklch(0.666 0.179 58.318);
   
   /* Base Colors */
   --color-black: #000;
   --color-white: #fff;
   --color-transparent: transparent;
 
-  /*Light mode bro*/
+
   
   /* Backgrounds */
-  --color-background: var(--color-slate-50);
+  --color-background: var(--color-almond-silk-50);
   --color-surface: var(--color-white);
-  --color-surface-muted: var(--color-slate-100);
-  --color-surface-hover: var(--color-slate-200);
+  --color-surface-muted: var(--color-almond-silk-100);
+  --color-surface-hover: var(--color-almond-silk-200);
   
   /* Text */
-  --color-foreground: var(--color-slate-900);
-  --color-foreground-secondary: var(--color-slate-600);
-  --color-muted: var(--color-slate-500);
-  --color-muted-foreground: var(--color-slate-400);
+  --color-foreground: var(--color-almond-silk-900);
+  --color-foreground-secondary: var(--color-almond-silk-600);
+  --color-muted: var(--color-almond-silk-500);
+  --color-muted-foreground: var(--color-almond-silk-400);
   
   /* Borders */
-  --color-border: var(--color-slate-300);
-  --color-border-strong: var(--color-slate-400);
-  --color-ring: var(--color-blue-500);
+  --color-border: var(--color-almond-silk-200);
+  --color-border-strong: var(--color-almond-silk-300);
+  --color-ring: var(--color-dark-cyan-500);
   
-  /* Primary Actions */
-  --color-primary: var(--color-blue-600);
-  --color-primary-hover: var(--color-blue-700);
+  /* Primary Actions (Cyan Brand Color) */
+  --color-primary: var(--color-dark-cyan-600);
+  --color-primary-hover: var(--color-dark-cyan-700);
   --color-primary-foreground: var(--color-white);
   
   /* Secondary Actions */
-  --color-secondary: var(--color-slate-200);
-  --color-secondary-hover: var(--color-slate-300);
-  --color-secondary-foreground: var(--color-slate-900);
+  --color-secondary: var(--color-almond-silk-200);
+  --color-secondary-hover: var(--color-almond-silk-300);
+  --color-secondary-foreground: var(--color-almond-silk-900);
   
   /* Semantic States */
-  --color-success: var(--color-green-600);
+  --color-success: var(--color-honeydew-600);
   --color-success-foreground: var(--color-white);
   --color-danger: var(--color-red-600);
   --color-danger-foreground: var(--color-white);
-  --color-warning: var(--color-amber-600);
+  --color-warning: var(--color-almond-silk-600);
   --color-warning-foreground: var(--color-white);
   
   /* Finance Specific */
-  --color-income: var(--color-green-600);
+  --color-income: var(--color-honeydew-600);
   --color-expense: var(--color-red-600);
   
   /* Accents */
-  --color-accent: var(--color-blue-50);
-  --color-accent-foreground: var(--color-blue-700);
+  --color-accent: var(--color-dark-cyan-50);
+  --color-accent-foreground: var(--color-dark-cyan-700);
   
   /* Card specific */
   --color-card: var(--color-white);
-  --color-card-foreground: var(--color-slate-900);
+  --color-card-foreground: var(--color-almond-silk-900);
   
   /* Inputs */
   --color-input: var(--color-border);
@@ -102,52 +115,52 @@
 /* ----dark mode bro----*/
 
 .dark {
-  /* Backgrounds */
-  --color-background: var(--color-slate-950);
-  --color-surface: var(--color-slate-900);
-  --color-surface-muted: var(--color-slate-800);
-  --color-surface-hover: var(--color-slate-700);
+  /* Backgrounds - Rich dark with warmth */
+  --color-background: var(--color-dusty-taupe-950);
+  --color-surface: var(--color-dusty-taupe-900);
+  --color-surface-muted: var(--color-dusty-taupe-800);
+  --color-surface-hover: var(--color-dusty-taupe-700);
   
-  /* Text */
-  --color-foreground: var(--color-slate-50);
-  --color-foreground-secondary: var(--color-slate-400);
-  --color-muted: var(--color-slate-500);
-  --color-muted-foreground: var(--color-slate-600);
+  /* Text - High contrast */
+  --color-foreground: var(--color-almond-silk-50);
+  --color-foreground-secondary: var(--color-almond-silk-400);
+  --color-muted: var(--color-almond-silk-500);
+  --color-muted-foreground: var(--color-almond-silk-600);
   
-  /* Borders */
-  --color-border: var(--color-slate-800);
-  --color-border-strong: var(--color-slate-700);
-  --color-ring: var(--color-blue-400);
+  /* Borders - Subtle */
+  --color-border: var(--color-dusty-taupe-800);
+  --color-border-strong: var(--color-dusty-taupe-700);
+  --color-ring: var(--color-dark-cyan-500);
   
-  /* Primary Actions */
-  --color-primary: var(--color-blue-500);
-  --color-primary-hover: var(--color-blue-400);
-  --color-primary-foreground: var(--color-slate-950);
+  /* Primary Actions - Bright Cyan (like your reference) */
+  --color-primary: var(--color-dark-cyan-500);
+  --color-primary-hover: var(--color-dark-cyan-400);
+  --color-primary-foreground: var(--color-dusty-taupe-950);
   
   /* Secondary Actions */
-  --color-secondary: var(--color-slate-800);
-  --color-secondary-hover: var(--color-slate-700);
-  --color-secondary-foreground: var(--color-slate-50);
+  --color-secondary: var(--color-dusty-taupe-800);
+  --color-secondary-hover: var(--color-dusty-taupe-700);
+  --color-secondary-foreground: var(--color-almond-silk-50);
   
   /* Semantic States */
-  --color-success: var(--color-green-500);
-  --color-success-foreground: var(--color-slate-950);
+  --color-success: var(--color-honeydew-500);
+  --color-success-foreground: var(--color-dusty-taupe-950);
   --color-danger: var(--color-red-500);
-  --color-danger-foreground: var(--color-slate-950);
-  --color-warning: var(--color-amber-500);
-  --color-warning-foreground: var(--color-slate-950);
+  --color-danger-foreground: var(--color-dusty-taupe-950);
+  --color-warning: var(--color-almond-silk-500);
+  --color-warning-foreground: var(--color-dusty-taupe-950);
   
   /* Finance Specific */
-  --color-income: var(--color-green-500);
+  --color-income: var(--color-honeydew-500);
   --color-expense: var(--color-red-500);
   
-  /* Accents */
-  --color-accent: var(--color-slate-800);
-  --color-accent-foreground: var(--color-blue-400);
+  /* Accents - Glowing cyan accent */
+  --color-accent: var(--color-dusty-taupe-800);
+  --color-accent-foreground: var(--color-dark-cyan-400);
   
   /* Card specific */
-  --color-card: var(--color-slate-900);
-  --color-card-foreground: var(--color-slate-50);
+  --color-card: var(--color-dusty-taupe-900);
+  --color-card-foreground: var(--color-almond-silk-50);
   
   /* Inputs */
   --color-input: var(--color-border);
