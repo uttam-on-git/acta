@@ -5,7 +5,7 @@ export default function HomeLayout({ children }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 relative">{children}</main>
       <Footer />
     </div>
   );

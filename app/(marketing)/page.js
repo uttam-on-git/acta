@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {
-  ChartBar,
   ChartBarIcon,
   FilePdfIcon,
+  GithubLogoIcon,
   LightningIcon,
   LockIcon,
   MagnifyingGlassIcon,
@@ -17,27 +17,48 @@ import {
 export default function Homepage() {
   return (
     <div>
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden pt-10 pb-10">
         <div className="absoluet inset-0 bg-linear-to-br from-blue-50 via-background to-background dark:from-slate-900 dark:via-background dark:to-background -z-10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-22">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-sm font-medium mb-8">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              No signup required • 100% private
+
+              <p
+                className="
+      relative inline-block
+      bg-size-[250%_100%,auto]
+      bg-clip-text text-transparent
+      [background-repeat:no-repeat,padding-box]
+      [--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))]
+      dark:[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))]
+      text-sm font-normal
+      [--base-color:var(--color-primary)]
+      [--base-gradient-color:var(--color-foreground)]
+    "
+                style={{
+                  "--spread": "68px",
+                  backgroundImage:
+                    "var(--bg), linear-gradient(var(--base-color), var(--base-color))",
+                  backgroundPosition: "0% center",
+                }}
+              >
+                No signup required • 100% free
+              </p>
             </div>
 
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
+              className="text-center text-3xl font-medium tracking-tight md:text-4xl lg:text-6xl mb-6"
             >
               Transform Your
-              <span className="text-primary"> Bank Statements </span>
+              <span className="block text-primary"> Bank Statements </span>
               Into Beautiful Insights
             </motion.h1>
 
-            <p className="text-xl text-foreground-secondary mb-10 max-w-2xl mx-auto">
+            <p className="text-sm text-foreground-secondary mb-10 max-w-2xl mx-auto">
               Privacy-first finance visualization. Upload your CSV, see stunning
               charts instantly. All processing happens in your browser-your data
               never leaves your device.
@@ -50,8 +71,8 @@ export default function Homepage() {
               >
                 Try It Free →
               </Link>
-              <button className="px-8 py-4 bg-surface-muted hover:bg-surface-hover text-foreground rounded-lg font-semibold text-lg transition border border-border">
-                Watch Demo
+              <button className="px-8 py-4 bg-surface-muted cursor-pointer hover:bg-surface-hover text-foreground rounded-lg font-semibold text-lg transition border border-border">
+                Open Source
               </button>
             </div>
 
@@ -62,21 +83,57 @@ export default function Homepage() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-24">
-        <div className="relative rounded-2xl border border-border bg-surface shadow-2xl overflow-hidden">
-          <Image
-            src="/dashboard-ss.png"
-            alt="dashboard preview"
-            className="w-full rounded-lg"
-            width={1400}
-            height={900}
-          ></Image>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-24">
+        <div className="border-x border-border relative bg-surface-muted p-2 md:p-4 lg:p-8 rounded-2xl">
+          <div className="absolute z-10 w-2 h-2 -top-1 -left-1 bg-primary rounded-full" />
+          <div className="absolute z-10 w-2 h-2 -top-1 -right-1 bg-primary rounded-full" />
+          <div className="absolute z-10 w-2 h-2 -bottom-1 -left-1 bg-primary rounded-full" />
 
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+          <motion.div
+            className="absolute z-10 w-2 h-2 -bottom-1 -right-1 bg-primary rounded-full"
+            animate={{
+              scale: [1, 1.3, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{
+              boxShadow:
+                "0 0 20px var(--color-primary), 0 0 40px var(--color-primary)",
+            }}
+          />
+
+          <div className="relative w-full">
+            <motion.div
+              className="relative z-10 w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <Image
+                src="/dashboard-ss.png"
+                alt="Dashboard Preview"
+                width={2000}
+                height={1200}
+                className="w-full rounded-lg border border-border shadow-2xl"
+                priority
+              />
+            </motion.div>
+
+            <div
+              className="absolute inset-0 z-0 m-auto h-[90%] w-[95%] rounded-lg border border-border opacity-50"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(315deg, var(--color-border) 0, var(--color-border) 1px, transparent 0, transparent 50%)",
+                backgroundSize: "10px 10px",
+              }}
+            />
+          </div>
         </div>
       </section>
-
       <section
         id="features"
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24"
