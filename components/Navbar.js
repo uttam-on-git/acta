@@ -29,21 +29,28 @@ export function Navbar() {
             whileTap={{ scale: 0.9 }}
             className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"
           >
-            <span className="text-primary-foreground font-bold text-lg">
-              A
-            </span>
+            <span className="text-primary-foreground font-bold text-lg">A</span>
           </motion.div>
           <span className="font-bold text-xl text-foreground">Acta</span>
         </Link>
 
         <div className="flex items-center gap-8">
-          <Link href="/#features" className="text-muted hover:text-foreground transition">
+          <Link
+            href="/#features"
+            className="text-muted hover:text-foreground transition"
+          >
             Features
           </Link>
-          <Link href="/pricing" className="text-muted hover:text-foreground transition">
+          <Link
+            href="/pricing"
+            className="text-muted hover:text-foreground transition"
+          >
             Pricing
           </Link>
-          <Link href="/faq" className="text-muted hover:text-foreground transition">
+          <Link
+            href="/faq"
+            className="text-muted hover:text-foreground transition"
+          >
             FAQ
           </Link>
         </div>
@@ -80,13 +87,22 @@ export function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/#features" className="text-muted hover:text-foreground transition">
+            <Link
+              href="/#features"
+              className="text-muted hover:text-foreground transition"
+            >
               Features
             </Link>
-            <Link href="/pricing" className="text-muted hover:text-foreground transition">
+            <Link
+              href="/pricing"
+              className="text-muted hover:text-foreground transition"
+            >
               Pricing
             </Link>
-            <Link href="/faq" className="text-muted hover:text-foreground transition">
+            <Link
+              href="/faq"
+              className="text-muted hover:text-foreground transition"
+            >
               FAQ
             </Link>
           </div>
@@ -101,6 +117,7 @@ export function Navbar() {
             </Link>
           </div>
         </div>
+        <div className="absolute bg-border  h-px bottom-0 inset-x-0" />
       </motion.div>
     </>
   );
