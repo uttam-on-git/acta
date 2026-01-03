@@ -28,12 +28,8 @@ export function CategoryBarChart({ data }) {
   const topCategories = data.slice(0, 6);
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 my-8">
-      <h2 className="text-xl font-semibold mb-4">
-        Top Spending Categories
-      </h2>
-
-      <ResponsiveContainer width="100%" height={300}>
+    <div className="bg-surface border border-border rounded-xl p-6 h-90">
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={topCategories}
           layout="vertical"

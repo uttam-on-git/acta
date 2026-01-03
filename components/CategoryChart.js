@@ -36,9 +36,8 @@ export function CategoryChart({ data }) {
   });
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mt-8">
-      <h2 className="text-xl font-semibold mb-4">Spending by category</h2>
-      <ResponsiveContainer width="100%" height={400}>
+    <div className="bg-surface border border-border rounded-xl p-6 h-90">
+      <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
             data={chartData}
@@ -48,7 +47,8 @@ export function CategoryChart({ data }) {
             label={({ name, percent }) =>
               `${name} ${(percent * 100).toFixed(0)}%`
             }
-            outerRadius={80}
+            outerRadius="70%"
+            innerRadius="40%"
             fill="#8884d8"
             dataKey="value"
             className=""
@@ -63,7 +63,7 @@ export function CategoryChart({ data }) {
             })}
           </Pie>
           <Tooltip formatter={(value) => `$${value.toFixed(2)}`} />
-          <Legend />
+          <Legend verticalAlign="bottom" height={36} />
         </PieChart>
       </ResponsiveContainer>
     </div>

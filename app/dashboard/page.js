@@ -12,6 +12,9 @@ import { exportToPdf } from "@/utils/exportPdf";
 import { EmptyState } from "@/components/dashboard/Empty";
 import { ActionBar } from "@/components/dashboard/ActionBar";
 import { FilterSection } from "@/components/dashboard/FilterSection";
+import { Card } from "@/components/dashboard/Card";
+
+import Papa from "papaparse";
 
 export default function Dashboard() {
   const [transactions, setTransactions] = useState([]);
@@ -115,6 +118,27 @@ export default function Dashboard() {
     }, 500);
   };
 
+  const handleTrySample = async () => {
+    try {
+      const response = await fetch("/sample.csv");
+      const csvText = await response.text();
+
+      Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => {
+          console.log("Sample data loaded:", results.data);
+          handleDataParsed(results.data);
+        },
+        error: (error) => {
+          console.error("Error loading sample:", error);
+        },
+      });
+    } catch (error) {
+      console.error("Failed to load sample:", error);
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <section className="mb-8">
@@ -126,15 +150,42 @@ export default function Dashboard() {
         </p>
       </section>
 
-      <section className="mb-8">
+      <section className="mb-10">
+  <div className="relative rounded-2xl border border-border bg-surface p-6 sm:p-8">
+    <div className="flex flex-col lg:flex-row items-stretch gap-6">
+      
+      {/* Upload */}
+      <div className="flex-1">
         <FileUpload onDataParsed={handleDataParsed} />
-      </section>
+      </div>
+
+      {/* Divider */}
+      <div className="relative flex lg:flex-col items-center justify-center">
+        <div className="hidden lg:block h-full w-px bg-border opacity-60" />
+        <div className="lg:hidden w-full h-px bg-border opacity-60" />
+        <span className="absolute bg-surface px-3 text-sm text-muted">
+          or
+        </span>
+      </div>
+
+      {/* Sample (soft action) */}
+      <button
+        onClick={handleTrySample}
+        className="self-center text-sm font-medium text-muted hover:text-foreground transition underline-offset-4 hover:underline"
+      >
+        Try sample data
+      </button>
+    </div>
+  </div>
+</section>
+
+
 
       {transactions.length === 0 ? (
         <EmptyState />
       ) : (
         <>
-          <ActionBar 
+          <ActionBar
             onExport={handlePdfExport}
             isExporting={isExporting}
             transactionCount={transactions.length}
@@ -151,17 +202,23 @@ export default function Dashboard() {
                   Insights
                 </h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <CategoryChart data={summary.byCategory} />
-                  <CategoryBarChart data={summary.byCategory} />
+                  <Card title="Spending by Category">
+                    <CategoryChart data={summary.byCategory} />
+                  </Card>
+                  <Card title="Top Spending Categories">
+                    <CategoryBarChart data={summary.byCategory} />
+                  </Card>
                 </div>
                 <div className="mt-6">
-                  <SpendingLineChart data={spendingOverTime} />
+                  <Card title="Spending Over Time">
+                    <SpendingLineChart data={spendingOverTime} />
+                  </Card>
                 </div>
               </section>
             </>
           )}
 
-          <FilterSection 
+          <FilterSection
             onSearchChange={handleSearchChange}
             onCategoryChange={handleCategoryChange}
             selectedCategory={selectedCategory}
