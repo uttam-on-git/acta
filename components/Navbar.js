@@ -74,7 +74,7 @@ export function Navbar() {
           pointerEvents: isScrolled ? "none" : "auto",
         }}
         transition={{ duration: 0.2, ease: "easeOut" }}
-        className="relative z-40"
+        className="fixed inset-x-0 top-0 z-40 bg-surface/80 backdrop-blur border-b border-border"
       >
         <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 max-w-7xl mx-auto">
           <Link href="/" className="flex items-center gap-2">

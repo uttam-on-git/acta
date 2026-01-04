@@ -36,8 +36,8 @@ export default function Homepage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden pt-0 -mt-px pb-10">
-        <div className="absoluet bg-linear-to-br from-blue-50 via-background to-background dark:from-slate-900 dark:via-background dark:to-background -z-10" />
+      <section className="relative overflow-hidden pt-24 md:pt-0 pb-10">
+        <div className="absoluet inset-0 bg-linear-to-br from-blue-50 via-background to-background dark:from-slate-900 dark:via-background dark:to-background -z-10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-22 relative -mt-px">
           <div className="absolute left-4 hidden md:block sm:left-6 lg:left-8 bg-border w-px inset-y-0" />
           {/* <div className="absolute left-4 sm:left-6 lg:left-8 bg-border w-px inset-y-0" /> */}
@@ -180,7 +180,7 @@ export default function Homepage() {
       </section>
       <section
         id="features"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24"
+        className="max-w-7xl mx-auto overflow-hidden px-4 sm:px-6 lg:px-8 py-24"
       >
         <motion.div
           initial={{ opacity: 0, x: 50 }}
