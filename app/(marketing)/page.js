@@ -21,16 +21,23 @@ import {
   TrendUpIcon,
   UsersIcon,
 } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
 
 export default function Homepage() {
   const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const resolvedTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <div>
       <section className="relative overflow-hidden pt-0 -mt-px pb-10">
-        <div className="absoluet inset-0 bg-linear-to-br from-blue-50 via-background to-background dark:from-slate-900 dark:via-background dark:to-background -z-10" />
+        <div className="absoluet bg-linear-to-br from-blue-50 via-background to-background dark:from-slate-900 dark:via-background dark:to-background -z-10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-22 relative -mt-px">
           <div className="absolute left-4 hidden md:block sm:left-6 lg:left-8 bg-border w-px inset-y-0" />
           {/* <div className="absolute left-4 sm:left-6 lg:left-8 bg-border w-px inset-y-0" /> */}
@@ -135,9 +142,10 @@ export default function Homepage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ scale: 1.02 }}
             >
-              {resolvedTheme && (
+              {!mounted ? (
+                <div className="w-full aspect-2000/1200 rounded-lg border border-border bg-surface-muted animate-pulse" />
+              ) : (
                 <motion.div
-                  suppressHydrationWarning
                   key={resolvedTheme}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -234,7 +242,7 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <LockIcon size={20} className="text-primary" />
+              <LockIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Privacy First</h3>
             <p className="text-muted text-sm">
@@ -253,7 +261,7 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <LightningIcon size={20} className="text-primary" />
+              <LightningIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Instant Analysis</h3>
             <p className="text-muted text-sm">
@@ -272,7 +280,7 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <MagnifyingGlassIcon size={20} className="text-primary" />
+              <MagnifyingGlassIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Powerful Filters</h3>
             <p className="text-muted text-sm">
@@ -290,7 +298,7 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <FilePdfIcon size={20} className="text-primary" />
+              <FilePdfIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">PDF Export</h3>
             <p className="text-muted text-sm">
@@ -308,7 +316,7 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <MoonIcon size={20} className="text-primary" />
+              <MoonIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Dark Mode</h3>
             <p className="text-muted text-sm">
