@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 
-export default function SearchBar({onSearchChange}) {
+export default function SearchBar({ onSearchChange }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => {
-    const value = e.target.value
-    setSearchTerm(value)
-    console.log('User search term:', value);
-    onSearchChange(searchTerm)
-  }
+    const value = e.target.value;
+    setSearchTerm(value);
+    console.log("User search term:", value);
+    onSearchChange(value);
+  };
 
   return (
-    <div className="bg-white shadow rounded-lg p-4 my-6">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
+    <div className="bg-surface border border-border rounded-xl p-4 my-6">
+      <label className="block text-sm font-medium text-muted mb-2">
         Search Transactions
       </label>
       <input
@@ -22,7 +22,7 @@ export default function SearchBar({onSearchChange}) {
         value={searchTerm}
         onChange={handleChange}
         placeholder="Type to search..."
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+        className="w-full px-4 py-2 border border-border bg-surface  text-foreground  focus:ring-ring focus:border-ring rounded-lg"
       />
     </div>
   );

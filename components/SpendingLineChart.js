@@ -1,16 +1,23 @@
 "use client";
 
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 export function SpendingLineChart({ data }) {
   if (!data || data.length === 0) return null;
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mt-8">
-      <h2>Daily Spending</h2>
-      <ResponsiveContainer width="100%" height={500}>
+    <div className="bg-surface border border-border rounded-xl p-6 h-90 mt-8">
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
           <XAxis
             dataKey="date"
             tick={{ fontSize: 12 }}
@@ -18,20 +25,20 @@ export function SpendingLineChart({ data }) {
             textAnchor="end"
             height={80}
           ></XAxis>
-          <YAxis 
+          <YAxis
             tick={{ fontSize: 12 }}
             tickFormatter={(value) => `$${value}`}
           />
-          <Tooltip 
-            formatter={(value) => [`$${value.toFixed(2)}`, 'Spent']}
+          <Tooltip
+            formatter={(value) => [`$${value.toFixed(2)}`, "Spent"]}
             labelFormatter={(label) => `Date: ${label}`}
           />
-          <Line 
-            type="monotone" 
-            dataKey="amount" 
-            stroke="#ef4444" 
+          <Line
+            type="monotone"
+            dataKey="amount"
             strokeWidth={2}
-            dot={{ fill: '#ef4444', r: 4 }}
+            stroke="var(--color-expense)"
+            dot={{ fill: "var(--color-expense)", r: 3 }}
           />
         </LineChart>
       </ResponsiveContainer>
