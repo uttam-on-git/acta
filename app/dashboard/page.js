@@ -151,35 +151,32 @@ export default function Dashboard() {
       </section>
 
       <section className="mb-10">
-  <div className="relative rounded-2xl border border-border bg-surface p-6 sm:p-8">
-    <div className="flex flex-col lg:flex-row items-stretch gap-6">
-      
-      {/* Upload */}
-      <div className="flex-1">
-        <FileUpload onDataParsed={handleDataParsed} />
-      </div>
+        <div className="relative rounded-2xl border border-border bg-surface p-6 sm:p-8">
+          <div className="flex flex-col lg:flex-row items-stretch gap-6">
+            {/* Upload */}
+            <div className="flex-1">
+              <FileUpload onDataParsed={handleDataParsed} />
+            </div>
 
-      {/* Divider */}
-      <div className="relative flex lg:flex-col items-center justify-center">
-        <div className="hidden lg:block h-full w-px bg-border opacity-60" />
-        <div className="lg:hidden w-full h-px bg-border opacity-60" />
-        <span className="absolute bg-surface px-3 text-sm text-muted">
-          or
-        </span>
-      </div>
+            {/* Divider */}
+            <div className="relative flex lg:flex-col items-center justify-center">
+              <div className="hidden lg:block h-full w-px bg-border opacity-60" />
+              <div className="lg:hidden w-full h-px bg-border opacity-60" />
+              <span className="absolute bg-surface px-3 text-sm text-muted">
+                or
+              </span>
+            </div>
 
-      {/* Sample (soft action) */}
-      <button
-        onClick={handleTrySample}
-        className="self-center text-sm font-medium text-muted hover:text-foreground transition underline-offset-4 hover:underline"
-      >
-        Try sample data
-      </button>
-    </div>
-  </div>
-</section>
-
-
+            {/* Sample (soft action) */}
+            <button
+              onClick={handleTrySample}
+              className="self-center text-sm font-medium text-muted hover:text-foreground transition underline-offset-4 hover:underline"
+            >
+              Try sample data
+            </button>
+          </div>
+        </div>
+      </section>
 
       {transactions.length === 0 ? (
         <EmptyState />
@@ -194,13 +191,12 @@ export default function Dashboard() {
           {summary && (
             <>
               <section className="mb-8">
-                <SummaryCards summary={summary} />
-              </section>
-
-              <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-6 text-foreground">
                   Insights
                 </h2>
+                <section className="mb-8">
+                  <SummaryCards summary={summary} />
+                </section>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <Card title="Spending by Category">
                     <CategoryChart data={summary.byCategory} />

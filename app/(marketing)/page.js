@@ -22,6 +22,7 @@ import {
   UsersIcon,
 } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
+import CTA from "@/components/dynamicCTA";
 
 export default function Homepage() {
   const { theme, systemTheme } = useTheme();
@@ -86,7 +87,10 @@ export default function Homepage() {
               explore stunning charts in seconds, with your data staying on your
               device.
             </p>
-            <p className="mt-4 block sm:hidden text-muted mb-10 max-w-2xl mx-auto">Upload a CSV. Get instant insights. Your data never leaves your device.</p>
+            <p className="mt-4 block sm:hidden text-muted mb-10 max-w-2xl mx-auto">
+              Upload a CSV. Get instant insights. Your data never leaves your
+              device.
+            </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
@@ -190,7 +194,9 @@ export default function Homepage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-4">Everything You Need</h2>
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-4">
+            Everything You Need
+          </h2>
           <p className="text-xl mt-4 text-muted max-w-2xl mx-auto">
             Powerful features designed to give you complete control over your
             financial data
@@ -455,20 +461,7 @@ export default function Homepage() {
         </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-        <h2 className="mb-6 text-3xl md:text-4xl font-semibold tracking-tight">
-          Ready to Understand Your Finances?
-        </h2>
-        <p className="mb-8 mt-4 max-w-2xl mx-auto text-muted">
-          No credit card required. Start visualizing in 30 seconds.
-        </p>
-        <Link
-          href="/dashboard"
-          className="inline-flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary-hover text-primary-foreground rounded-lg font-semibold text-lg transition shadow-lg shadow-primary/20"
-        >
-          Get Started Free →
-        </Link>
-      </section>
+      <CTA></CTA>
     </div>
   );
 }
