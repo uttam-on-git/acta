@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 
 import Image from "next/image";
@@ -22,6 +23,10 @@ import {
 } from "@phosphor-icons/react";
 
 export default function Homepage() {
+  const { theme, systemTheme } = useTheme();
+
+  const resolvedTheme = theme === "system" ? systemTheme : theme;
+
   return (
     <div>
       <section className="relative overflow-hidden pt-0 -mt-px pb-10">
@@ -130,14 +135,28 @@ export default function Homepage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ scale: 1.02 }}
             >
-              <Image
-                src="/dashboard-ss.png"
-                alt="Dashboard Preview"
-                width={2000}
-                height={1200}
-                className="w-full rounded-lg border border-border shadow-2xl"
-                priority
-              />
+              {resolvedTheme && (
+                <motion.div
+                  suppressHydrationWarning
+                  key={resolvedTheme}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image
+                    src={
+                      resolvedTheme === "dark"
+                        ? "/dashboard-dark.png"
+                        : "/dashboard-light.png"
+                    }
+                    alt="Dashboard Preview"
+                    width={2000}
+                    height={1200}
+                    className="w-full rounded-lg border border-border shadow-2xl"
+                    priority
+                  />
+                </motion.div>
+              )}
             </motion.div>
 
             <div
@@ -195,12 +214,11 @@ export default function Homepage() {
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-              <span className="text-3xl">
-                <ChartBarIcon></ChartBarIcon>
-              </span>
+              <ChartBarIcon size={20} className="text-primary" />
             </div>
+
             <h3 className="text-xl font-semibold mb-2">Interactive Charts</h3>
-            <p className="text-muted">
+            <p className="text-muted text-sm">
               Pie charts, bar graphs, and line charts that update in real-time
               as you filter your data
             </p>
@@ -215,13 +233,11 @@ export default function Homepage() {
             whileHover={{ y: -5 }}
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
-            <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl">
-                <LockIcon></LockIcon>
-              </span>
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <LockIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Privacy First</h3>
-            <p className="text-muted">
+            <p className="text-muted text-sm">
               Your data never leaves your browser. No servers, no tracking,
               completely private
             </p>
@@ -236,13 +252,11 @@ export default function Homepage() {
             whileHover={{ y: -5 }}
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
-            <div className="w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl">
-                <LightningIcon></LightningIcon>
-              </span>
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <LightningIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Instant Analysis</h3>
-            <p className="text-muted">
+            <p className="text-muted text-sm">
               Upload your CSV and see insights in seconds. Smart
               auto-categorization included
             </p>
@@ -257,13 +271,11 @@ export default function Homepage() {
             whileHover={{ y: -5 }}
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
-            <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl">
-                <MagnifyingGlassIcon></MagnifyingGlassIcon>
-              </span>
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <MagnifyingGlassIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Powerful Filters</h3>
-            <p className="text-muted">
+            <p className="text-muted text-sm">
               Search transactions, filter by category and date range to find
               exactly what you need
             </p>
@@ -277,13 +289,11 @@ export default function Homepage() {
             whileHover={{ y: -5 }}
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
-            <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl">
-                <FilePdfIcon></FilePdfIcon>
-              </span>
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <FilePdfIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">PDF Export</h3>
-            <p className="text-muted">
+            <p className="text-muted text-sm">
               Generate professional reports with one click. Perfect for taxes
               and record-keeping
             </p>
@@ -297,13 +307,11 @@ export default function Homepage() {
             whileHover={{ y: -5 }}
             className="p-6 rounded-xl border border-border bg-card hover:shadow-lg transition"
           >
-            <div className="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4">
-              <span className="text-3xl">
-                <MoonIcon></MoonIcon>
-              </span>
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                <MoonIcon size={20} className="text-primary" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Dark Mode</h3>
-            <p className="text-muted">
+            <p className="text-muted text-sm">
               Beautiful design in both light and dark modes. Follows your system
               preferences
             </p>
@@ -325,10 +333,22 @@ export default function Homepage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
             <div className="space-y-6">
               {[
-                ["Launch Faster", BriefcaseIcon],
-                ["Iterate Rapidly", UsersIcon],
-                ["Scale Smarter", TrendUpIcon],
-              ].map(([title, Icon]) => (
+                {
+                  title: "Launch Faster",
+                  desc: "Upload a CSV and instantly see clean summaries, charts, and insights-no setup required.",
+                  Icon: BriefcaseIcon,
+                },
+                {
+                  title: "Iterate Rapidly",
+                  desc: "Refine filters, explore categories, and adjust views as your financial questions change.",
+                  Icon: UsersIcon,
+                },
+                {
+                  title: "Scale Smarter",
+                  desc: "Analyze months or years of transactions smoothly as your financial data grows.",
+                  Icon: TrendUpIcon,
+                },
+              ].map(({ title, desc, Icon }) => (
                 <motion.div
                   key={title}
                   whileHover={{ y: -6 }}
@@ -337,9 +357,7 @@ export default function Homepage() {
                 >
                   <Icon size={20} className="text-primary mb-3" />
                   <h3 className="font-semibold">{title}</h3>
-                  <p className="mt-2 text-sm text-muted">
-                    Analyze and understand your data without complexity.
-                  </p>
+                  <p className="mt-2 text-sm text-muted">{desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -396,10 +414,22 @@ export default function Homepage() {
 
             <div className="space-y-6">
               {[
-                ["Reuse Intelligence", StorefrontIcon],
-                ["Prevent Surprises", HouseIcon],
-                ["Automate More", GraduationCapIcon],
-              ].map(([title, Icon]) => (
+                {
+                  title: "Reuse Intelligence",
+                  desc: "Recognize recurring spending patterns and categories you can rely on every month.",
+                  Icon: StorefrontIcon,
+                },
+                {
+                  title: "Prevent Surprises",
+                  desc: "Catch unusual expenses and hidden trends early before they impact your budget.",
+                  Icon: HouseIcon,
+                },
+                {
+                  title: "Automate More",
+                  desc: "Let calculations, breakdowns, and insights update automatically as data changes.",
+                  Icon: GraduationCapIcon,
+                },
+              ].map(({ title, desc, Icon }) => (
                 <motion.div
                   key={title}
                   whileHover={{ y: -6 }}
@@ -408,9 +438,7 @@ export default function Homepage() {
                 >
                   <Icon size={20} className="text-primary mb-3" />
                   <h3 className="font-semibold">{title}</h3>
-                  <p className="mt-2 text-sm text-muted">
-                    Make confident decisions with real-time clarity.
-                  </p>
+                  <p className="mt-2 text-sm text-muted">{desc}</p>
                 </motion.div>
               ))}
             </div>
