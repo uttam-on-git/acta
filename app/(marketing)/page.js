@@ -36,8 +36,8 @@ export default function Homepage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden pt-24 md:pt-0 pb-10">
-        <div className="absoluet inset-0 bg-linear-to-br from-blue-50 via-background to-background dark:from-slate-900 dark:via-background dark:to-background -z-10" />
+      <section className="relative overflow-hidden pt-0 -mt-px pb-10">
+        <div className="absoluet bg-linear-to-br from-blue-50 via-background to-background dark:from-slate-900 dark:via-background dark:to-background -z-10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-22 relative -mt-px">
           <div className="absolute left-4 hidden md:block sm:left-6 lg:left-8 bg-border w-px inset-y-0" />
           {/* <div className="absolute left-4 sm:left-6 lg:left-8 bg-border w-px inset-y-0" /> */}
@@ -81,11 +81,12 @@ export default function Homepage() {
               Into Beautiful Insights
             </motion.h1>
 
-            <p className="text-sm text-foreground-secondary mb-10 max-w-2xl mx-auto">
+            <p className="mt-4 hidden sm:block text-muted mb-10 max-w-2xl mx-auto">
               A privacy-first way to visualize your finances. Upload a CSV and
               explore stunning charts in seconds, with your data staying on your
               device.
             </p>
+            <p className="mt-4 block sm:hidden text-muted mb-10 max-w-2xl mx-auto">Upload a CSV. Get instant insights. Your data never leaves your device.</p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
@@ -189,8 +190,8 @@ export default function Homepage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">Everything You Need</h2>
-          <p className="text-xl text-foreground-secondary max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-4">Everything You Need</h2>
+          <p className="text-xl mt-4 text-muted max-w-2xl mx-auto">
             Powerful features designed to give you complete control over your
             financial data
           </p>
@@ -333,7 +334,7 @@ export default function Homepage() {
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
               Designed for every financial journey
             </h2>
-            <p className="mt-4 text-muted">
+            <p className="mt-4 max-w-2xl mx-auto text-muted">
               One private system that adapts as your finances evolve.
             </p>
           </div>
@@ -455,10 +456,10 @@ export default function Homepage() {
       </section>
 
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-        <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+        <h2 className="mb-6 text-3xl md:text-4xl font-semibold tracking-tight">
           Ready to Understand Your Finances?
         </h2>
-        <p className="text-xl text-foreground-secondary mb-8">
+        <p className="mb-8 mt-4 max-w-2xl mx-auto text-muted">
           No credit card required. Start visualizing in 30 seconds.
         </p>
         <Link
