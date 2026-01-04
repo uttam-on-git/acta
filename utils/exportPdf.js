@@ -1,155 +1,182 @@
-
-import { jsPDF } from 'jspdf';
-import autoTable from 'jspdf-autotable';
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export function exportToPdf(transactions, summary) {
-  console.log("Acta report is ready yo ...", {
-    transactions,
-    summary,
-  });
-
   const doc = new jsPDF();
+
   const dateStr = new Date().toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
-  //header
-  doc.setFillColor(79, 70, 229); // Indigo-600
-  doc.rect(0, 0, 210, 40, 'F');
-  
-  doc.setFontSize(26);
+  // --- BRAND COLORS (RGB-safe) ---
+  const BRAND_PRIMARY = [20, 184, 166];      // dark-cyan
+  const BRAND_PRIMARY_DARK = [13, 148, 136];
+  const INCOME_GREEN = [22, 163, 74];         // honeydew
+  const EXPENSE_RED = [220, 38, 38];
+  const TEXT_DARK = [30, 41, 59];
+  const TEXT_MUTED = [100, 116, 139];
+  const BORDER_SOFT = [226, 232, 240];
+  const SURFACE_MUTED = [248, 250, 252];
+
+  // --- HEADER ---
+  doc.setFillColor(...BRAND_PRIMARY);
+  doc.rect(0, 0, 210, 42, "F");
+
+  doc.setFontSize(24);
   doc.setTextColor(255, 255, 255);
   doc.setFont(undefined, "bold");
-  doc.text("FINANCE REPORT", 14, 22);
+  doc.text("ACTA FINANCIAL REPORT", 14, 22);
 
   doc.setFontSize(10);
   doc.setFont(undefined, "normal");
-  doc.setTextColor(224, 231, 255); // Indigo-100
-  doc.text(`STATEMENT PERIOD: ${dateStr.toUpperCase()}`, 14, 32);
-  doc.text("CONFIDENTIAL FINANCIAL DOCUMENT", 130, 32);
+  doc.setTextColor(236, 254, 255);
+  doc.text(`Generated on ${dateStr}`, 14, 32);
+  doc.text("Privacy-first • Local-only processing", 140, 32);
 
-  // summary
-  doc.setTextColor(30, 41, 59); // Slate-800
+  // --- SUMMARY TITLE ---
   doc.setFontSize(14);
   doc.setFont(undefined, "bold");
-  doc.text("Financial Summary", 14, 55);
+  doc.setTextColor(...TEXT_DARK);
+  doc.text("Financial Summary", 14, 58);
 
-  //summary box
-  doc.setDrawColor(226, 232, 240); // Slate-200
-  doc.setFillColor(248, 250, 252); // Slate-50
-  doc.roundedRect(14, 60, 182, 40, 3, 3, 'FD');
-
+  // --- SUMMARY CARD ---
+  doc.setDrawColor(...BORDER_SOFT);
+  doc.setFillColor(...SURFACE_MUTED);
+  doc.roundedRect(14, 62, 182, 42, 4, 4, "FD");
 
   doc.setFontSize(10);
   doc.setFont(undefined, "normal");
-  doc.setTextColor(100, 116, 139); // Slate-500
-  
-  doc.text("TOTAL INCOME", 24, 72);
-  doc.text("TOTAL EXPENSES", 84, 72);
-  doc.text("NET SAVINGS", 144, 72);
+  doc.setTextColor(...TEXT_MUTED);
 
-  doc.setFontSize(12);
+  doc.text("TOTAL INCOME", 26, 75);
+  doc.text("TOTAL EXPENSES", 86, 75);
+  doc.text("NET SAVINGS", 146, 75);
+
+  doc.setFontSize(13);
   doc.setFont(undefined, "bold");
-  doc.setTextColor(30, 41, 59);
-  doc.text(`$${summary.totalIncome.toLocaleString()}`, 24, 80);
-  
-  doc.setTextColor(220, 38, 38); // Red-600
-  doc.text(`$${summary.totalExpense.toLocaleString()}`, 84, 80);
-  
-  doc.setTextColor(22, 163, 74); // Green-600
-  doc.text(`$${summary.netSavings.toLocaleString()}`, 144, 80);
 
+  doc.setTextColor(...INCOME_GREEN);
+  doc.text(`$${summary.totalIncome.toLocaleString()}`, 26, 84);
 
-  doc.setFontSize(10);
+  doc.setTextColor(...EXPENSE_RED);
+  doc.text(`$${summary.totalExpense.toLocaleString()}`, 86, 84);
+
+  doc.setTextColor(...BRAND_PRIMARY_DARK);
+  doc.text(`$${summary.netSavings.toLocaleString()}`, 146, 84);
+
+  doc.setFontSize(9);
   doc.setFont(undefined, "normal");
-  doc.setTextColor(100, 116, 139);
-  doc.text(`Based on ${summary.transactionCount} total transactions processed this month.`, 24, 92);
+  doc.setTextColor(...TEXT_MUTED);
+  doc.text(
+    `Based on ${summary.transactionCount} transactions`,
+    26,
+    96
+  );
 
-//category table
-  doc.setTextColor(30, 41, 59);
+  // --- CATEGORY BREAKDOWN ---
   doc.setFontSize(14);
   doc.setFont(undefined, "bold");
-  doc.text("Spending by Category", 14, 115);
+  doc.setTextColor(...TEXT_DARK);
+  doc.text("Spending by Category", 14, 118);
 
   const categoryRows = summary.byCategory
-    .filter(cat => cat.category !== 'Income')
+    .filter((c) => c.category !== "Income")
     .sort((a, b) => b.total - a.total)
-    .map(cat => [
-      cat.category,
-      `$${cat.total}`,
-      cat.count,
-      `${cat.percentage}%`
+    .map((c) => [
+      c.category,
+      `$${c.total.toLocaleString()}`,
+      c.count,
+      `${c.percentage}%`,
     ]);
 
   autoTable(doc, {
-    startY: 120,
-    head: [['Category', 'Total Amount', 'Count', 'Share']],
+    startY: 122,
+    head: [["Category", "Total", "Count", "Share"]],
     body: categoryRows,
-    theme: 'grid',
-    headStyles: { fillColor: [79, 70, 229], textColor: [255, 255, 255], fontStyle: 'bold' },
-    styles: { fontSize: 9, cellPadding: 4 },
+    theme: "grid",
+    headStyles: {
+      fillColor: BRAND_PRIMARY,
+      textColor: [255, 255, 255],
+      fontStyle: "bold",
+    },
+    styles: {
+      fontSize: 9,
+      cellPadding: 5,
+      textColor: TEXT_DARK,
+      lineColor: BORDER_SOFT,
+    },
     columnStyles: {
-      1: { halign: 'right' },
-      2: { halign: 'center' },
-      3: { halign: 'right' }
-    }
+      1: { halign: "right" },
+      2: { halign: "center" },
+      3: { halign: "right" },
+    },
   });
 
-  const lastY = (doc).lastAutoTable.finalY || 180;
-  
-  // check if we need a new page for the transaction header
-  let startTransactionsY = lastY + 20;
-  if (startTransactionsY > 260) {
+  const lastY = doc.lastAutoTable.finalY || 170;
+
+  // --- TRANSACTIONS ---
+  let startY = lastY + 20;
+  if (startY > 260) {
     doc.addPage();
-    startTransactionsY = 20;
+    startY = 20;
   }
 
-  doc.setTextColor(30, 41, 59);
   doc.setFontSize(14);
   doc.setFont(undefined, "bold");
-  doc.text("Transaction History", 14, startTransactionsY);
+  doc.setTextColor(...TEXT_DARK);
+  doc.text("Transaction History", 14, startY);
 
-  const transactionRows = transactions.map(t => [
+  const transactionRows = transactions.map((t) => [
     t.date,
     t.description,
     t.category,
-    { 
-      content: t.type === 'credit' ? `+$${t.amount.toLocaleString()}` : `-$${Math.abs(t.amount).toLocaleString()}`,
-      styles: { 
-        textColor: t.type === 'credit' ? [22, 163, 74] : [30, 41, 59],
-        fontStyle: 'bold'
-      }
-    }
+    {
+      content:
+        t.type === "credit"
+          ? `+$${t.amount.toLocaleString()}`
+          : `-$${Math.abs(t.amount).toLocaleString()}`,
+      styles: {
+        textColor:
+          t.type === "credit" ? INCOME_GREEN : EXPENSE_RED,
+        fontStyle: "bold",
+      },
+    },
   ]);
 
   autoTable(doc, {
-    startY: startTransactionsY + 5,
-    head: [['Date', 'Description', 'Category', 'Amount']],
+    startY: startY + 6,
+    head: [["Date", "Description", "Category", "Amount"]],
     body: transactionRows,
-    theme: 'striped',
-    headStyles: { fillColor: [51, 65, 85], textColor: [255, 255, 255] },
-    styles: { fontSize: 8 },
+    theme: "striped",
+    headStyles: {
+      fillColor: [15, 118, 110],
+      textColor: [255, 255, 255],
+    },
+    styles: {
+      fontSize: 8,
+      cellPadding: 4,
+      lineColor: BORDER_SOFT,
+    },
     columnStyles: {
-      3: { halign: 'right' }
-    }
+      3: { halign: "right" },
+    },
   });
 
-  // footer
-  const pageCount = (doc).internal.getNumberOfPages();
+  // --- FOOTER ---
+  const pageCount = doc.internal.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);
     doc.setFontSize(8);
-    doc.setTextColor(148, 163, 184);
+    doc.setTextColor(...TEXT_MUTED);
     doc.text(
-      `Acta Report - Page ${i} of ${pageCount}`,
+      `Acta • Privacy-first finance • Page ${i} of ${pageCount}`,
       doc.internal.pageSize.getWidth() / 2,
       doc.internal.pageSize.getHeight() - 10,
-      { align: 'center' }
+      { align: "center" }
     );
   }
 
-  doc.save(`FinanceReport_${dateStr.replace(/ /g, '_')}.pdf`);
-  console.log("Acta: Report generated successfully.");
+  doc.save(`Acta_Report_${dateStr.replace(/ /g, "_")}.pdf`);
 }
