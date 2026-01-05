@@ -95,9 +95,11 @@ export default function Homepage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 href="/dashboard"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 min-w-55 bg-primary hover:bg-primary-hover text-primary-foreground rounded-lg font-semibold text-lg transition shadow-lg shadow-primary/20 w-full sm:w-auto"
+                className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 min-w-55 w-full sm:w-auto bg-primary hover:bg-primary-hover text-primary-foreground rounded-lg font-semibold text-lg transition shadow-lg shadow-primary/20"
               >
-                <span>Try It Free</span>
+                <span className="pointer-events-none absolute inset-0 rounded-lg bg-primary blur-xl opacity-0 transition-opacity duration-300 group-hover:opacity-40" />
+
+                <span className="relative">Try It Free</span>
                 <ArrowCircleUpRightIcon size={24} weight="bold" />
               </Link>
 

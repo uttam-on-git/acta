@@ -1,37 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Acta: Turn Bank CSVs Into Clear Financial Insights
 
-## Getting Started
+A personal finance tracker that visualizes your spending. Upload your bank CSV and see where your money goes. Everything happens in your browser, so your data stays private.
 
-First, run the development server:
+🔗 **Live Demo:** https://acta-beta.vercel.app/
+
+🎥 **Demo Video:**  
+[![Acta Demo Video](https://img.youtube.com/vi/1pGYh7BOTs4/0.jpg)](https://www.youtube.com/watch?v=1pGYh7BOTs4)
+
+## What It Does
+
+- Upload bank statements (CSV format)
+- See spending breakdown by category
+- Interactive charts and graphs
+- Filter transactions by date/category
+- Export reports to PDF
+- Dark mode included
+
+## Built With
+
+- Next.js 15 & React 19
+- Tailwind CSS for styling
+- Recharts for the graphs
+- Papaparse for CSV files
+
+## How to Run
 
 ```bash
+git clone https://github.com/uttam-on-git/acta.git
+cd acta
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- All client-side processing (no backend needed!)
+- Automatic transaction categorization
+- Responsive design for mobile
+- Real-time chart updates
 
-## Learn More
+## Screenshots
 
-To learn more about Next.js, take a look at the following resources:
+![Light Mode](./public/light-mode.png)
+![Dark Mode](./public/dark-mode.png)
+![Dashboard](./public/dashboard-dark.png)
+![Designed for every financial journey](./public/card-pr.png)
+![CTA section](./public/CTA.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## What I Learned
 
-## Deploy on Vercel
+This was my first time working with data visualization in React. Learned a lot about:
+- Performance optimization with useMemo
+- Handling large CSV files
+- Building a proper design system
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Future Ideas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# acta
+- Export to Excel
+- Local storage persistance
+
+---
+
+Built with ☕ and lots of Stack Overflow
