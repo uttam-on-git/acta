@@ -109,7 +109,7 @@ export function Footer() {
         {/* bottom */}
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-muted text-sm">
-            © 2025 Acta. Built with Next.js & Tailwind v4.
+            © 2026 Acta. Built with Next.js & Tailwind v4.
           </p>
         </div>
       </div>

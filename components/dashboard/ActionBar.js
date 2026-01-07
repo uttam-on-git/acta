@@ -1,30 +1,33 @@
+import { FilePdfIcon, SpinnerGapIcon } from "@phosphor-icons/react";
 import ArrowLine from "../ArrowLine";
 
 export function ActionBar({ onExport, isExporting, transactionCount }) {
   return (
-    <div className="
+    <div
+      className="
       flex flex-col gap-4
       sm:flex-row sm:items-center sm:justify-between
       mb-8 p-4
       bg-surface rounded-lg
       border border-border
-    ">
+    "
+    >
       {/* Left: Transaction Count */}
       <div className="text-sm text-center sm:text-left">
-        <span className="font-medium text-foreground">
-          {transactionCount}
-        </span>
+        <span className="font-medium text-foreground">{transactionCount}</span>
         <span className="text-muted"> transactions loaded</span>
       </div>
 
       {/* Right: Actions */}
-      <div className="
+      <div
+        className="
         flex flex-col gap-3
         sm:flex-row sm:gap-4
         w-full sm:w-auto
-      ">
+      "
+      >
         {/* Export Excel (Disabled) */}
-        <div className="relative flex justify-center w-full sm:w-auto">
+        <div className="relative hidden sm:flex justify-center w-full sm:w-auto">
           <button
             disabled
             className="
@@ -51,12 +54,14 @@ export function ActionBar({ onExport, isExporting, transactionCount }) {
               gap-1
             "
           >
-            <span className="
+            <span
+              className="
               text-[10px]
               font-mono
               text-primary
               whitespace-nowrap
-            ">
+            "
+            >
               On the way
             </span>
 
@@ -69,16 +74,31 @@ export function ActionBar({ onExport, isExporting, transactionCount }) {
           onClick={onExport}
           disabled={isExporting}
           className={`
-            w-full sm:w-auto
-            px-4 py-2 rounded-lg font-medium transition
-            ${
-              isExporting
-                ? "bg-surface-muted text-muted cursor-not-allowed"
-                : "bg-primary hover:bg-primary-hover text-primary-foreground shadow-sm"
-            }
-          `}
+    w-full sm:w-auto cursor-pointer
+    inline-flex items-center justify-center gap-2
+    px-4 py-2 rounded-lg font-medium transition
+    ${
+      isExporting
+        ? "bg-surface-muted text-muted cursor-not-allowed"
+        : "bg-primary hover:bg-primary-hover text-primary-foreground shadow-sm"
+    }
+  `}
         >
-          {isExporting ? "⏳ Generating..." : "📄 Export PDF"}
+          {isExporting ? (
+            <>
+              <SpinnerGapIcon
+                size={18}
+                weight="bold"
+                className="animate-spin"
+              />
+              Generating…
+            </>
+          ) : (
+            <>
+              <FilePdfIcon size={18} weight="bold" />
+              Export PDF
+            </>
+          )}
         </button>
       </div>
     </div>
